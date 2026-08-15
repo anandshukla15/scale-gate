@@ -2,20 +2,16 @@ import express from "express";
 import cors from "cors";
 import helmet from "helmet";
 
+import healthRoutes from "./routes/health.routes.js";
+
 const app = express();
 
 app.use(helmet());
+
 
 app.use(cors());
 
 app.use(express.json());
 
-app.get("/health", (req, res) => {
-  res.status(200).json({
-    success: true,
-    service: "scale-gate-api",
-    status: "healthy"
-  });
-});
-
+app.use("/health", healthRoutes);
 export default app;
