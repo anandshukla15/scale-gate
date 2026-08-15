@@ -36,3 +36,30 @@ export const createCompany = async (
     });
   }
 };
+
+
+export const getCompanies = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    const companies = await prisma.company.findMany({
+      orderBy: {
+        createdAt: "desc"
+      }
+    });
+
+    return res.status(200).json({
+      success: true,
+      count: companies.length,
+      data: companies
+    });
+  } catch (error) {
+    console.error(error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Failed to fetch companies"
+    });
+  }
+};
