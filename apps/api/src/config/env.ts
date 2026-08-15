@@ -5,10 +5,7 @@ export const env = {
 
   NODE_ENV: process.env.NODE_ENV || "development",
 
-
-
-
-
-  
-  SERVICE_NAME: process.env.SERVICE_NAME || "api-server"
+ 
+  SERVICE_NAME: process.env.SERVICE_NAME || "api-server",
+  SERVER_ID: process.env.SERVER_ID || "server-1"
 };
