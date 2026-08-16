@@ -1,0 +1,42 @@
+services:
+
+  api:
+    build:
+      context: ./apps/api
+      dockerfile: Dockerfile
+
+    container_name: scale-gate-api
+
+    ports:
+      - "3000:3000"
+
+    env_file:
+      - ./apps/api/.env
+
+    depends_on:
+      - redis
+
+    networks:
+      - scale-gate-network
+
+  redis:
+    image: redis:7-alpine
+
+    container_name: scale-gate-redis
+
+    ports:
+      - "6379:6379"
+
+    volumes:
+      - redis-data:/data
+
+    command: redis-server --appendonly yes
+
+    networks:
+      - scale-gate-network
+
+networks:
+  scale-gate-network:
+
+volumes:
+  redis-data:
