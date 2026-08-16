@@ -94,6 +94,13 @@ export const getUserById = async (
   try {
     const { id } = req.params;
 
+    if (typeof id !== "string") {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid ID parameter",
+      });
+    }
+
     const user = await prisma.user.findUnique({
       where: { id },
       select: {
@@ -133,6 +140,13 @@ export const updateUser = async (
   try {
     const { id } = req.params;
     const { name, email } = req.body;
+
+    if (typeof id !== "string") {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid ID parameter",
+      });
+    }
 
     const existingUser = await prisma.user.findUnique({
       where: { id }
@@ -180,6 +194,13 @@ export const deleteUser = async (
 ) => {
   try {
     const { id } = req.params;
+
+    if (typeof id !== "string") {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid ID parameter",
+      });
+    }
 
     const existingUser = await prisma.user.findUnique({
       where: { id }

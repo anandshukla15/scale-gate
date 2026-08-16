@@ -111,6 +111,13 @@ export const getOrderById = async (
   try {
     const { id } = req.params;
 
+    if (typeof id !== "string") {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid ID parameter",
+      });
+    }
+
     const order = await prisma.order.findUnique({
       where: { id },
       include: {

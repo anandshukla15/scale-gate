@@ -134,6 +134,13 @@ export const getCompanyById = async (
   try {
     const { id } = req.params;
 
+    if (typeof id !== "string") {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid ID parameter",
+      });
+    }
+
     const company = await prisma.company.findUnique({
       where: { id }
     });
@@ -168,6 +175,13 @@ export const updateCompany = async (
     const { id } = req.params;
 
     const { name, description, website } = req.body;
+
+    if (typeof id !== "string") {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid ID parameter",
+      });
+    }
 
     const existingCompany = await prisma.company.findUnique({
       where: { id }
@@ -210,6 +224,13 @@ export const deleteCompany = async (
 ) => {
   try {
     const { id } = req.params;
+
+    if (typeof id !== "string") {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid ID parameter",
+      });
+    }
 
     const existingCompany = await prisma.company.findUnique({
       where: { id }
