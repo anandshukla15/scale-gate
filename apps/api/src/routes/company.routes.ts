@@ -2,7 +2,10 @@ import { Router } from "express";
 
 import {
   createCompany,
-  getCompanies
+  getCompanies,
+  getCompanyById,
+  updateCompany,
+  deleteCompany
 } from "../controllers/company.controller.js";
 
 const router = Router();
@@ -10,5 +13,11 @@ const router = Router();
 router.post("/", createCompany);
 
 router.get("/", getCompanies);
+
+router.get("/:id", getCompanyById);
+
+router.put("/:id", updateCompany);
+
+router.delete("/:id", deleteCompany);
 
 export default router;
