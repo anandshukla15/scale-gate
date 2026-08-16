@@ -8,6 +8,8 @@ import {
   deleteUser
 } from "../controllers/user.controller.js";
 
+import { validateUser } from "../middleware/validate.js";
+
 const router = Router();
 
 router.post("/", createUser);
