@@ -8,11 +8,14 @@ import {
   deleteUser
 } from "../controllers/user.controller.js";
 
-import { validateUser } from "../middleware/validate.js";
+import { validate } from "../middleware/validate.js";
+import {
+  createUserSchema
+} from "../validators/user.validator.js";
 
 const router = Router();
 
-router.post("/", createUser);
+router.post("/",validate(createUserSchema), createUser);
 
 router.get("/", getUsers);
 
